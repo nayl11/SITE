@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragrances - Boutique</title>
+    <meta name="description" content="Boutique de fragrances artisanales. Ajoutez des parfums à votre panier et commandez en quelques clics.">
+
+    <link rel="icon" href="https://images.unsplash.com/photo-1594035910387-fea47794261f">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+<!-- HERO -->
+<img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de" style="width:100%;height:400px;object-fit:cover;">
+
+<script>
+const heroImages = [
+{ src: "https://images.unsplash.com/photo-1541643600914-78b084683601" },
+{ src: "https://images.unsplash.com/photo-1585386959984-a41552231658" },
+{ src: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519" }
+];
+
+const fragrances = [
+{
+id:"f1",
+title:"Cuir & Ambre",
+price:95,
+img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539"
+},
+{
+id:"f2",
+title:"Rosée Matinale",
+price:78,
+img:"https://images.unsplash.com/photo-1588405748880-12d1d2a59f75"
+},
+{
+id:"f3",
+title:"Épices d'Orient",
+price:102,
+img:"https://images.unsplash.com/photo-1619994403073-2cec99c0c8b6"
+},
+{
+id:"f4",
+title:"Brise Marine",
+price:72,
+img:"https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19"
+},
+{
+id:"f5",
+title:"Bois Secret",
+price:88,
+img:"https://images.unsplash.com/photo-1587017539504-67cfbddac569"
+},
+{
+id:"f6",
+title:"Fleur d'Oranger",
+price:69,
+img:"https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd"
+}
+];
+
+document.write('<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:20px;">');
+
+fragrances.forEach(p=>{
+document.write(`
+<div style="border:1px solid #ddd;padding:10px;">
+<img src="${p.img}" style="width:100%;height:200px;object-fit:cover;">
+<h3>${p.title}</h3>
+<p>${p.price}€</p>
+</div>
+`);
+});
+
+document.write('</div>');
+</script>
+
+</body>
+</html>
