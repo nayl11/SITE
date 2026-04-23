@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fragrances - Boutique</title>
     <meta name="description" content="Boutique de fragrances artisanales. Ajoutez des parfums à votre panier et commandez en quelques clics.">
-    <link rel="icon" href="https://source.unsplash.com/16x16/?perfume,bottle">
+    <link rel="icon" href="https://picsum.photos/16?random=99">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,111 +29,701 @@
     </script>
     <style>
         .container-max { max-width: 1100px; }
+        /* Cart drawer transition helpers */
         .cart-open { transform: translateX(0%); }
         .cart-closed { transform: translateX(100%); }
+        /* focus indicator when tabbing */
         .user-is-tabbing :focus { outline: 3px solid rgba(99,102,241,0.25); outline-offset: 2px; }
+        /* Bottle style for cards: circular framed image to suggest bottle */
         .bottle-frame { border-radius: 9999px; width: 80px; height: 80px; overflow: hidden; box-shadow: 0 6px 18px rgba(15,23,36,0.12); }
     </style>
-</head>
-
-<body class="min-h-screen bg-white text-gray-800 font-body leading-relaxed">
-
-<header class="bg-white sticky top-0 z-50 shadow-sm">
-    <div class="container container-max mx-auto px-4 py-4 flex items-center justify-between">
-
-        <div class="flex items-center gap-4">
-            <a href="#home" class="logo-link flex items-center gap-3">
-                <img src="https://source.unsplash.com/100x100/?perfume,bottle,glass" 
-                     class="w-10 h-10 rounded-full object-cover">
-                <div>
-                    <h1 class="text-lg font-display text-brand-dark">Fragrances Studio</h1>
-                    <p class="text-xs text-gray-500 -mt-1">Artisan parfumeur</p>
-                </div>
-            </a>
-        </div>
-
-    </div>
-</header>
-
-<main id="home">
-
-<!-- HERO -->
-<section>
-    <div class="container container-max mx-auto px-4 py-12 grid lg:grid-cols-2 gap-8 items-center">
-
-        <div>
-            <h2 class="text-4xl font-display">Voyage olfactif moderne</h2>
-        </div>
-
-        <div>
-            <img id="heroMainImg"
-                 src="https://source.unsplash.com/800x600/?perfume,bottle"
-                 class="w-full h-96 object-cover rounded-xl">
-        </div>
-
-    </div>
-</section>
-
-<!-- COLLECTION -->
-<section id="collections" class="container container-max mx-auto px-4 py-12">
-
-<div id="fragrance-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
-</section>
-
-</main>
-
-<script>
-// ONLY IMAGES CHANGED BELOW (structure untouched)
-
-const heroImages = [
-    { src: "https://source.unsplash.com/200x200/?perfume,bottle,glass", alt: "" },
-    { src: "https://source.unsplash.com/201x200/?fragrance,bottle", alt: "" },
-    { src: "https://source.unsplash.com/202x200/?perfume,flacon", alt: "" }
-];
-
-const fragrances = [
+    <script type="application/ld+json">
     {
-        id: "f1",
-        title: "Cuir & Ambre",
-        img: "https://source.unsplash.com/600x600/?perfume,bottle,luxury"
-    },
-    {
-        id: "f2",
-        title: "Rosée Matinale",
-        img: "https://source.unsplash.com/601x600/?perfume,rose,bottle"
-    },
-    {
-        id: "f3",
-        title: "Épices d'Orient",
-        img: "https://source.unsplash.com/602x600/?perfume,spice,bottle"
-    },
-    {
-        id: "f4",
-        title: "Brise Marine",
-        img: "https://source.unsplash.com/603x600/?perfume,ocean,bottle"
-    },
-    {
-        id: "f5",
-        title: "Bois Secret",
-        img: "https://source.unsplash.com/604x600/?perfume,wood,bottle"
-    },
-    {
-        id: "f6",
-        title: "Fleur d'Oranger",
-        img: "https://source.unsplash.com/605x600/?perfume,orange,flower,bottle"
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Fragrances Studio",
+        "description": "Sélection raffinée de parfums et fragrances artisanales",
+        "url": "",
+        "logo": "https://picsum.photos/200?random=100"
     }
-];
+    </script>
+</head>
+<body class="min-h-screen bg-white text-gray-800 font-body leading-relaxed">
+    <header class="bg-white sticky top-0 z-50 shadow-sm">
+        <div class="container container-max mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="#home" class="logo-link flex items-center gap-3" aria-label="Accueil">
+                    <img src="https://picsum.photos/48?random=101" alt="Logo Fragrances Studio - flacon stylisé" class="w-10 h-10 rounded-full object-cover" loading="lazy">
+                    <div>
+                        <h1 class="text-lg font-display text-brand-dark">Fragrances Studio</h1>
+                        <p class="text-xs text-gray-500 -mt-1">Artisan parfumeur</p>
+                    </div>
+                </a>
+            </div>
 
-const testimonials = [
-    { img: "https://source.unsplash.com/200x200/?perfume,person" },
-    { img: "https://source.unsplash.com/201x200/?fragrance,model" },
-    { img: "https://source.unsplash.com/202x200/?perfume,bottle,hand" }
-];
+            <nav aria-label="Navigation principale" class="hidden sm:block">
+                <ul id="nav-list" class="flex items-center gap-6 text-sm text-gray-700"></ul>
+            </nav>
 
-const aboutImg = "https://source.unsplash.com/700x480/?perfume,atelier,bottle";
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center bg-gray-100 rounded-full px-3 py-1 gap-2">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input id="searchInput" type="search" placeholder="Rechercher une fragrance" aria-label="Recherche" class="bg-transparent outline-none text-sm w-48" />
+                </div>
 
-</script>
+                <button id="menuToggle" class="sm:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none" aria-label="Ouvrir le menu">
+                    <i class="fas fa-bars"></i>
+                </button>
 
+                <button id="cartToggle" class="relative p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none" aria-label="Afficher le panier">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cartCount" class="absolute -top-1 -right-1 bg-brand-gold text-white text-xs rounded-full px-1.5 py-0.5">0</span>
+                </button>
+
+                <a href="#newsletter" class="btn-contact hidden sm:inline-block bg-brand-dark text-white px-4 py-2 rounded-md text-sm hover:bg-gray-900">Contact</a>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="sm:hidden hidden bg-white border-t">
+            <div class="px-4 py-4">
+                <ul id="mobile-nav-list" class="flex flex-col gap-3 text-gray-700"></ul>
+            </div>
+        </div>
+    </header>
+
+    <main id="home" class="mt-6">
+        <!-- Hero -->
+        <section class="bg-gradient-to-b from-white to-brand-pink/10">
+            <div class="container container-max mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-display text-brand-dark leading-tight">Voyage olfactif moderne</h2>
+                    <p class="mt-4 text-gray-600 max-w-xl">Explorez une collection de fragrances conçues pour évoquer des souvenirs, des lieux et des instants précieux. Chaque parfum est une composition unique, alliant notes naturelles et savoir-faire contemporain.</p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="#collections" class="btn-explore bg-brand-dark text-white px-4 py-2 rounded-md hover:bg-black" aria-label="Explorer les collections">Explorer</a>
+                        <a href="#newsletter" class="btn-subtle text-sm text-brand-dark px-4 py-2 rounded-md border border-gray-200 hover:bg-gray-50" aria-label="S'abonner">S'abonner</a>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="rounded-xl overflow-hidden shadow-lg">
+                        <img id="heroMainImg" src="https://picsum.photos/800/600?random=1" alt="Flacon de parfum élégant posé sur une surface texturée" class="w-full h-64 sm:h-80 md:h-96 object-cover" loading="lazy">
+                    </div>
+
+                    <div id="heroThumbs" class="mt-3 grid grid-cols-3 gap-3"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collections / Fragrances -->
+        <section id="collections" class="container container-max mx-auto px-4 py-12">
+            <header class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-display text-brand-dark">Notre sélection</h3>
+                <div class="text-sm text-gray-600 hidden sm:block">Découvrez des parfums pour chaque humeur et chaque saison.</div>
+            </header>
+
+            <div id="fragrance-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <div class="mt-8 text-center">
+                <a href="#collections" id="loadMoreBtn" class="inline-block text-sm text-brand-dark border border-gray-200 px-4 py-2 rounded-md hover:bg-gray-50">Voir plus</a>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="bg-gray-50">
+            <div class="container container-max mx-auto px-4 py-12">
+                <h4 class="text-xl font-display text-brand-dark mb-6">Ce que disent nos clients</h4>
+                <div id="testimonials-list" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- About / Philosophy -->
+        <section id="about" class="container container-max mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h5 class="text-2xl font-display text-brand-dark">Notre philosophie</h5>
+                    <p class="mt-4 text-gray-600">Nous croyons à la puissance des matières premières et à l'authenticité. Chaque fragrance est pensée comme une histoire à raconter — avec un équilibre subtil entre tradition et modernité.</p>
+                    <ul class="mt-4 space-y-2 text-gray-700">
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-brand-gold mt-1"></i> Ingrédients sélectionnés</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-brand-gold mt-1"></i> Formulations durables</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check text-brand-gold mt-1"></i> Fabrication artisanale</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://picsum.photos/700/480?random=5" alt="Atelier de parfumerie avec flacons et matières premières" class="w-full rounded-lg shadow-md object-cover" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Newsletter -->
+        <section id="newsletter" class="bg-brand-dark text-white">
+            <div class="container container-max mx-auto px-4 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div>
+                        <h6 class="text-2xl font-display">Restez informé</h6>
+                        <p class="mt-2 text-gray-100">Recevez des nouveautés, des offres exclusives et des histoires sur nos créations.</p>
+                    </div>
+                    <form id="newsletterForm" class="flex gap-2" aria-label="Formulaire d'inscription à la newsletter">
+                        <input id="emailInput" type="email" placeholder="Votre adresse e-mail" required class="w-full px-4 py-2 rounded-md text-black" />
+                        <button type="submit" class="bg-brand-gold px-4 py-2 rounded-md font-semibold hover:brightness-95">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Drawer -->
+    <aside id="cartDrawer" aria-hidden="true" class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-lg cart-closed transition-transform duration-300 z-50 overflow-auto">
+        <div class="p-4 border-b flex items-center justify-between">
+            <h3 class="text-lg font-semibold">Votre panier</h3>
+            <button id="closeCart" class="p-2 text-gray-600 hover:bg-gray-100 rounded-md" aria-label="Fermer le panier">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="cartContent" class="p-4 space-y-4">
+            <!-- Cart items injected here -->
+        </div>
+        <div class="p-4 border-t">
+            <div class="flex items-center justify-between mb-3">
+                <div class="text-sm text-gray-600">Total</div>
+                <div id="cartTotal" class="text-lg font-semibold text-brand-dark">0€</div>
+            </div>
+            <div class="flex gap-2">
+                <button id="checkoutBtn" class="w-full bg-brand-gold text-white px-4 py-2 rounded-md hover:brightness-95">Commander</button>
+            </div>
+        </div>
+    </aside>
+
+    <footer class="bg-white border-t mt-12">
+        <div class="container container-max mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <h6 class="text-lg font-display text-brand-dark">Fragrances Studio</h6>
+                <p class="mt-2 text-gray-600">Atelier de parfumerie — créations artisanales et éditions limitées.</p>
+                <div id="socialLinks" class="mt-4 flex gap-3 text-gray-600"></div>
+            </div>
+
+            <div>
+                <h6 class="text-sm font-semibold text-gray-700">Liens</h6>
+                <ul id="footer-links" class="mt-3 space-y-2 text-gray-600 text-sm"></ul>
+            </div>
+
+            <div>
+                <h6 class="text-sm font-semibold text-gray-700">Coordonnées</h6>
+                <address class="not-italic mt-3 text-gray-600 text-sm">
+                    12 Rue des Parfums<br>
+                    75000 Paris, France<br>
+                    <a href="mailto:contact@fragrances.example" class="text-brand-dark hover:underline">contact@fragrances.example</a>
+                </address>
+            </div>
+        </div>
+        <div class="bg-gray-50 border-t">
+            <div class="container container-max mx-auto px-4 py-4 text-xs text-gray-500">© <span id="year"></span> Fragrances Studio. Tous droits réservés.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Data layer (all repeatable content defined here)
+        const navigationItems = [
+            { "label": "Accueil", "href": "#home" },
+            { "label": "Collections", "href": "#collections" },
+            { "label": "À propos", "href": "#about" },
+            { "label": "Témoignages", "href": "#testimonials" },
+            { "label": "Contact", "href": "#newsletter" }
+        ];
+
+        const heroImages = [
+            { "src": "https://picsum.photos/200?random=2", "alt": "Détails d'ingrédients naturels pour fragrance" },
+            { "src": "https://picsum.photos/200?random=3", "alt": "Atelier de création de parfums" },
+            { "src": "https://picsum.photos/200?random=4", "alt": "Notes florales harmonieuses" }
+        ];
+
+        const fragrances = [
+            {
+                "id": "f1",
+                "title": "Cuir & Ambre",
+                "notes": "Cuir - Ambre - Bois de Santal",
+                "price": 95,
+                "img": "https://picsum.photos/600/600?random=11",
+                "alt": "Flacon sombre sur fond en cuir",
+                "rating": 4.7,
+                "description": "Une composition chaude et profonde, pensée pour les soirées et les instants intimes."
+            },
+            {
+                "id": "f2",
+                "title": "Rosée Matinale",
+                "notes": "Rose - Néroli - Musc blanc",
+                "price": 78,
+                "img": "https://picsum.photos/600/600?random=12",
+                "alt": "Flacon délicat avec pétales de rose",
+                "rating": 4.5,
+                "description": "Fraîche et aérienne, évoque les matinées printanières et les jardins en fleur."
+            },
+            {
+                "id": "f3",
+                "title": "Épices d'Orient",
+                "notes": "Cardamome - Vanille - Encens",
+                "price": 102,
+                "img": "https://picsum.photos/600/600?random=13",
+                "alt": "Flacon et épices disposés sur une table",
+                "rating": 4.8,
+                "description": "Riche en caractère, ce parfum mélange chaleur épicée et douceur vanillée."
+            },
+            {
+                "id": "f4",
+                "title": "Brise Marine",
+                "notes": "Algues - Agrumes - Musc",
+                "price": 72,
+                "img": "https://picsum.photos/600/600?random=14",
+                "alt": "Bouteille claire sur fond marin",
+                "rating": 4.4,
+                "description": "Vivifiante et salée, parfaite pour l'été et les escapades en bord de mer."
+            },
+            {
+                "id": "f5",
+                "title": "Bois Secret",
+                "notes": "Cèdre - Patchouli - Tabac",
+                "price": 88,
+                "img": "https://picsum.photos/600/600?random=15",
+                "alt": "Flacon sur fond boisé et feuilles",
+                "rating": 4.6,
+                "description": "Une signature boisée et mystérieuse, aux notes profondes et persistantes."
+            },
+            {
+                "id": "f6",
+                "title": "Fleur d'Oranger",
+                "notes": "Orange - Fleur d'oranger - Ambrette",
+                "price": 69,
+                "img": "https://picsum.photos/600/600?random=16",
+                "alt": "Flacon clair entouré d'orangers en fleurs",
+                "rating": 4.3,
+                "description": "Une fragrance lumineuse et douce, inspirée des vergers méditerranéens."
+            }
+        ];
+
+        const testimonials = [
+            {
+                "name": "Claire L.",
+                "text": "Parfums raffinés et service impeccable. J'ai trouvé mon parfum signature.",
+                "img": "https://picsum.photos/200?random=21",
+                "alt": "Portrait de cliente satisfaite"
+            },
+            {
+                "name": "Marc D.",
+                "text": "Excellent équilibre des notes, longue tenue. Un vrai coup de cœur.",
+                "img": "https://picsum.photos/200?random=22",
+                "alt": "Portrait d'un client satisfait"
+            },
+            {
+                "name": "Sofia R.",
+                "text": "Emballage soigné et fragrances uniques. Je recommande vivement.",
+                "img": "https://picsum.photos/200?random=23",
+                "alt": "Portrait d'une cliente souriante"
+            }
+        ];
+
+        const footerLinks = [
+            { "label": "Mentions légales", "href": "#legal" },
+            { "label": "Politique de confidentialité", "href": "#privacy" },
+            { "label": "Livraison & Retours", "href": "#shipping" },
+            { "label": "FAQ", "href": "#faq" }
+        ];
+
+        const socialLinks = [
+            { "label": "Instagram", "href": "#instagram", "icon": "fab fa-instagram" },
+            { "label": "Facebook", "href": "#facebook", "icon": "fab fa-facebook" },
+            { "label": "Pinterest", "href": "#pinterest", "icon": "fab fa-pinterest" }
+        ];
+
+        // Cart state
+        let cart = []; // { id: "f1", qty: 1 }
+        const STORAGE_KEY = "fragrances_cart_v1";
+
+        // Reusable render functions
+
+        function renderNavItems(items) {
+            return items.map(function(item) {
+                return "<li><a href=\"" + item.href + "\" class=\"nav-link hover:text-black\" data-link=\"" + item.href + "\">" + item.label + "</a></li>";
+            }).join("");
+        }
+
+        function renderHeroThumbs(items) {
+            return items.map(function(item, idx) {
+                return "<button class=\"thumb-btn rounded-md overflow-hidden\" data-src=\"" + item.src + "\" aria-label=\"Voir image " + (idx + 1) + "\">" +
+                        "<img src=\"" + item.src + "\" alt=\"" + item.alt + "\" class=\"w-full h-20 object-cover\" loading=\"lazy\">" +
+                    "</button>";
+            }).join("");
+        }
+
+        function renderFragranceCards(items) {
+            return items.map(function(item) {
+                return "<article class=\"bg-white rounded-xl shadow-sm overflow-hidden border flex flex-col\">" +
+                        "<div class=\"p-4 flex items-center gap-4\">" +
+                            "<div class=\"bottle-frame flex-shrink-0\">" +
+                                "<img src=\"" + item.img + "\" alt=\"" + item.alt + "\" class=\"w-full h-full object-cover\" loading=\"lazy\">" +
+                            "</div>" +
+                            "<div class=\"flex-1\">" +
+                                "<h3 class=\"text-lg font-semibold text-brand-dark\">" + item.title + "</h3>" +
+                                "<p class=\"text-sm text-gray-500 mt-1\">" + item.notes + "</p>" +
+                                "<p class=\"text-xs text-gray-400 mt-2\">Note moyenne: " + item.rating + " ★</p>" +
+                            "</div>" +
+                        "</div>" +
+                        "<div class=\"px-4 pb-4 mt-auto\">" +
+                            "<div class=\"flex items-center justify-between\">" +
+                                "<div class=\"text-sm text-gray-700 font-medium\">" + item.price + "€</div>" +
+                                "<div class=\"flex items-center gap-2\">" +
+                                    "<button class=\"fav-btn text-gray-400 hover:text-red-500\" data-action=\"fav\" data-id=\"" + item.id + "\" aria-label=\"Ajouter aux favoris\"><i class=\"fas fa-heart\"></i></button>" +
+                                    "<button class=\"details-btn bg-transparent text-brand-dark px-3 py-1 rounded-md text-sm border border-gray-200 hover:bg-gray-50\" data-action=\"details\" data-id=\"" + item.id + "\">Détails</button>" +
+                                    "<button class=\"add-btn bg-brand-dark text-white px-3 py-1 rounded-md text-sm hover:bg-black\" data-action=\"add\" data-id=\"" + item.id + "\">Commander</button>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>" +
+                    "</article>";
+            }).join("");
+        }
+
+        function renderTestimonials(items) {
+            return items.map(function(item) {
+                return "<blockquote class=\"bg-white p-4 rounded-lg shadow-sm\">" +
+                        "<div class=\"flex items-center gap-3\">" +
+                            "<img src=\"" + item.img + "\" alt=\"" + item.alt + "\" class=\"w-12 h-12 rounded-full object-cover\" loading=\"lazy\">" +
+                            "<div>" +
+                                "<strong class=\"text-sm text-brand-dark\">" + item.name + "</strong>" +
+                                "<p class=\"text-xs text-gray-500\">Client satisfait</p>" +
+                            "</div>" +
+                        "</div>" +
+                        "<p class=\"mt-3 text-gray-600 text-sm\">\"" + item.text + "\"</p>" +
+                    "</blockquote>";
+            }).join("");
+        }
+
+        function renderFooterLinks(items) {
+            return items.map(function(item) {
+                return "<li><a href=\"" + item.href + "\" class=\"footer-link text-sm hover:underline\" data-link=\"" + item.href + "\">" + item.label + "</a></li>";
+            }).join("");
+        }
+
+        function renderSocialLinks(items) {
+            return items.map(function(item) {
+                return "<a href=\"" + item.href + "\" class=\"social text-gray-600 p-2 rounded-md hover:bg-gray-100\" aria-label=\"" + item.label + "\" data-link=\"" + item.href + "\"><i class=\"" + item.icon + "\"></i></a>";
+            }).join("");
+        }
+
+        function renderCartItems(cartState) {
+            if (cartState.length === 0) {
+                return "<div class=\"text-center text-gray-500\">Votre panier est vide.</div>";
+            }
+            return cartState.map(function(line) {
+                const product = fragrances.find(function(f) { return f.id === line.id; });
+                const lineTotal = (product.price * line.qty).toFixed(2);
+                return "<div class=\"flex items-center gap-3 border rounded-md p-3\">" +
+                            "<img src=\"" + product.img + "\" alt=\"" + product.alt + "\" class=\"w-16 h-16 object-cover rounded-md\" loading=\"lazy\">" +
+                            "<div class=\"flex-1\">" +
+                                "<div class=\"flex items-center justify-between\">" +
+                                    "<div class=\"text-sm font-medium text-brand-dark\">" + product.title + "</div>" +
+                                    "<div class=\"text-sm text-gray-700\">" + product.price + "€</div>" +
+                                "</div>" +
+                                "<div class=\"mt-2 flex items-center gap-2\">" +
+                                    "<button class=\"qty-btn px-2 py-1 border rounded\" data-action=\"dec\" data-id=\"" + line.id + "\">-</button>" +
+                                    "<div class=\"px-3 py-1 border rounded\">" + line.qty + "</div>" +
+                                    "<button class=\"qty-btn px-2 py-1 border rounded\" data-action=\"inc\" data-id=\"" + line.id + "\">+</button>" +
+                                    "<button class=\"ml-3 text-sm text-red-500\" data-action=\"remove\" data-id=\"" + line.id + "\">Supprimer</button>" +
+                                "</div>" +
+                            "</div>" +
+                        "</div>";
+            }).join("");
+        }
+
+        // Persistence
+        function loadCart() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    cart = JSON.parse(raw);
+                } else {
+                    cart = [];
+                }
+            } catch (e) {
+                cart = [];
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const totalQty = cart.reduce(function(sum, line) { return sum + line.qty; }, 0);
+            document.getElementById("cartCount").textContent = totalQty;
+        }
+
+        function addToCart(id, qty) {
+            qty = qty || 1;
+            const existing = cart.find(function(c) { return c.id === id; });
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ "id": id, "qty": qty });
+            }
+            saveCart();
+            renderCart();
+        }
+
+        function setQty(id, qty) {
+            const existing = cart.find(function(c) { return c.id === id; });
+            if (existing) {
+                existing.qty = Math.max(0, qty);
+                if (existing.qty === 0) {
+                    cart = cart.filter(function(c) { return c.id !== id; });
+                }
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(function(c) { return c.id !== id; });
+            saveCart();
+            renderCart();
+        }
+
+        function calculateTotal() {
+            return cart.reduce(function(sum, line) {
+                const product = fragrances.find(function(f) { return f.id === line.id; });
+                return sum + product.price * line.qty;
+            }, 0);
+        }
+
+        // Render initial UI
+        document.getElementById("nav-list").innerHTML = renderNavItems(navigationItems);
+        document.getElementById("mobile-nav-list").innerHTML = renderNavItems(navigationItems);
+        document.getElementById("heroThumbs").innerHTML = renderHeroThumbs(heroImages);
+        document.getElementById("fragrance-grid").innerHTML = renderFragranceCards(fragrances);
+        document.getElementById("testimonials-list").innerHTML = renderTestimonials(testimonials);
+        document.getElementById("footer-links").innerHTML = renderFooterLinks(footerLinks);
+        document.getElementById("socialLinks").innerHTML = renderSocialLinks(socialLinks);
+
+        // Load cart from storage and render
+        loadCart();
+        updateCartCount();
+        renderCart();
+
+        // Event delegation for links and interactive elements
+        document.addEventListener("click", function(event) {
+            // Anchor navigation interception (all anchors with data-link or href starting with #)
+            const anchor = event.target.closest("a[data-link], a[href^='#']");
+            if (anchor) {
+                const href = anchor.getAttribute("data-link") || anchor.getAttribute("href");
+                if (href && href.startsWith("#")) {
+                    event.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        // Close mobile menu
+                        document.getElementById("mobileMenu").classList.add("hidden");
+                        // Close cart if open
+                        closeCart();
+                    } else {
+                        // For footer or social placeholders, just prevent default
+                        event.preventDefault();
+                    }
+                } else {
+                    // External or placeholder: prevent default to avoid navigation in this demo
+                    event.preventDefault();
+                }
+            }
+
+            // Mobile menu toggle
+            const menuBtn = event.target.closest("#menuToggle");
+            if (menuBtn) {
+                event.preventDefault();
+                document.getElementById("mobileMenu").classList.toggle("hidden");
+            }
+
+            // Hero thumbnail click -> update main image
+            const thumb = event.target.closest(".thumb-btn");
+            if (thumb) {
+                event.preventDefault();
+                const src = thumb.getAttribute("data-src");
+                if (src) {
+                    document.getElementById("heroMainImg").src = src.replace("200", "800/600");
+                }
+            }
+
+            // Add to cart button (delegated)
+            const addBtn = event.target.closest("button[data-action='add']");
+            if (addBtn) {
+                event.preventDefault();
+                const id = addBtn.getAttribute("data-id");
+                addToCart(id, 1);
+                // Visual feedback
+                addBtn.classList.add("opacity-80");
+                setTimeout(function() { addBtn.classList.remove("opacity-80"); }, 300);
+                alert("Ajouté au panier !");
+                return;
+            }
+
+            // Favorite button (toggles)
+            const favBtn = event.target.closest("button[data-action='fav']");
+            if (favBtn) {
+                event.preventDefault();
+                favBtn.classList.toggle("text-red-500");
+                const pressed = favBtn.classList.contains("text-red-500");
+                favBtn.setAttribute("aria-pressed", pressed ? "true" : "false");
+                return;
+            }
+
+            // Details button -> show modal-like alert with details
+            const detailsBtn = event.target.closest("button[data-action='details']");
+            if (detailsBtn) {
+                event.preventDefault();
+                const id = detailsBtn.getAttribute("data-id");
+                const product = fragrances.find(function(f) { return f.id === id; });
+                if (product) {
+                    alert(product.title + "\n\n" + product.description + "\n\nNotes: " + product.notes + "\nPrix: " + product.price + "€");
+                }
+                return;
+            }
+
+            // Cart toggle
+            const cartToggle = event.target.closest("#cartToggle");
+            if (cartToggle) {
+                event.preventDefault();
+                toggleCart();
+                return;
+            }
+
+            // Close cart
+            const closeCartBtn = event.target.closest("#closeCart");
+            if (closeCartBtn) {
+                event.preventDefault();
+                closeCart();
+                return;
+            }
+
+            // Cart item quantity buttons and remove
+            const qtyBtn = event.target.closest("#cartContent button[data-action='inc'], #cartContent button[data-action='dec'], #cartContent button[data-action='remove']");
+            if (qtyBtn) {
+                event.preventDefault();
+                const action = qtyBtn.getAttribute("data-action");
+                const id = qtyBtn.getAttribute("data-id");
+                if (action === "inc") {
+                    const line = cart.find(function(c) { return c.id === id; });
+                    if (line) { setQty(id, line.qty + 1); }
+                } else if (action === "dec") {
+                    const line = cart.find(function(c) { return c.id === id; });
+                    if (line) {
+                        setQty(id, line.qty - 1);
+                    }
+                } else if (action === "remove") {
+                    removeFromCart(id);
+                }
+                return;
+            }
+
+            // Checkout button
+            const checkout = event.target.closest("#checkoutBtn");
+            if (checkout) {
+                event.preventDefault();
+                if (cart.length === 0) {
+                    alert("Votre panier est vide.");
+                    return;
+                }
+                // Simulate checkout
+                alert("Merci pour votre commande ! Montant: " + calculateTotal().toFixed(2) + "€");
+                cart = [];
+                saveCart();
+                renderCart();
+                closeCart();
+                return;
+            }
+        });
+
+        // Search: filter fragrances by title or notes (live)
+        document.getElementById("searchInput").addEventListener("input", function(e) {
+            const q = e.target.value.trim().toLowerCase();
+            const filtered = fragrances.filter(function(f) {
+                return f.title.toLowerCase().includes(q) || f.notes.toLowerCase().includes(q);
+            });
+            document.getElementById("fragrance-grid").innerHTML = renderFragranceCards(filtered);
+        });
+
+        // Newsletter form handling (simple)
+        document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const email = document.getElementById("emailInput").value.trim();
+            if (email) {
+                this.reset();
+                alert("Merci! Vous êtes inscrit(e) avec " + email);
+            }
+        });
+
+        // Load more button: append variations of existing items (data-driven)
+        document.getElementById("loadMoreBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            const currentCount = document.querySelectorAll("#fragrance-grid article").length;
+            if (currentCount > fragrances.length * 2) {
+                alert("Plus de produits à afficher pour le moment.");
+                return;
+            }
+            // Create extras by mapping and giving new ids + images
+            const extra = fragrances.map(function(item, index) {
+                return {
+                    "id": item.id + "-m" + index,
+                    "title": item.title + " (Éd. spéciale)",
+                    "notes": item.notes,
+                    "price": item.price,
+                    "img": "https://picsum.photos/600/600?random=" + (30 + index),
+                    "alt": item.alt,
+                    "rating": item.rating,
+                    "description": item.description
+                };
+            });
+            document.getElementById("fragrance-grid").innerHTML += renderFragranceCards(extra);
+        });
+
+        // Cart UI helpers
+        function renderCart() {
+            document.getElementById("cartContent").innerHTML = renderCartItems(cart);
+            document.getElementById("cartTotal").textContent = calculateTotal().toFixed(2) + "€";
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById("cartDrawer");
+            const isClosed = drawer.classList.contains("cart-closed");
+            if (isClosed) {
+                openCart();
+            } else {
+                closeCart();
+            }
+        }
+
+        function openCart() {
+            const drawer = document.getElementById("cartDrawer");
+            drawer.classList.remove("cart-closed");
+            drawer.classList.add("cart-open");
+            drawer.setAttribute("aria-hidden", "false");
+        }
+
+        function closeCart() {
+            const drawer = document.getElementById("cartDrawer");
+            drawer.classList.remove("cart-open");
+            drawer.classList.add("cart-closed");
+            drawer.setAttribute("aria-hidden", "true");
+        }
+
+        // Utility: set year in footer
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Accessibility: focus styles for keyboard users
+        document.addEventListener("keyup", function(e) {
+            if (e.key === "Tab") {
+                document.body.classList.add("user-is-tabbing");
+            }
+        });
+
+        // Initial render of cart (after definitions)
+        renderCart();
+    </script>
 </body>
 </html>
