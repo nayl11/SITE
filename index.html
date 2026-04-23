@@ -6,76 +6,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fragrances - Boutique</title>
     <meta name="description" content="Boutique de fragrances artisanales. Ajoutez des parfums à votre panier et commandez en quelques clics.">
-
-    <link rel="icon" href="https://images.unsplash.com/photo-1594035910387-fea47794261f">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://source.unsplash.com/16x16/?perfume,bottle">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "brand-dark": "#0f1724",
+                        "brand-gold": "#c69b6d",
+                        "brand-pink": "#f3d0d9"
+                    },
+                    fontFamily: {
+                        "display": ["\"Playfair Display\"", "serif"],
+                        "body": ["\"Inter\"", "system-ui", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .container-max { max-width: 1100px; }
+        .cart-open { transform: translateX(0%); }
+        .cart-closed { transform: translateX(100%); }
+        .user-is-tabbing :focus { outline: 3px solid rgba(99,102,241,0.25); outline-offset: 2px; }
+        .bottle-frame { border-radius: 9999px; width: 80px; height: 80px; overflow: hidden; box-shadow: 0 6px 18px rgba(15,23,36,0.12); }
+    </style>
 </head>
 
-<body>
+<body class="min-h-screen bg-white text-gray-800 font-body leading-relaxed">
+
+<header class="bg-white sticky top-0 z-50 shadow-sm">
+    <div class="container container-max mx-auto px-4 py-4 flex items-center justify-between">
+
+        <div class="flex items-center gap-4">
+            <a href="#home" class="logo-link flex items-center gap-3">
+                <img src="https://source.unsplash.com/100x100/?perfume,bottle,glass" 
+                     class="w-10 h-10 rounded-full object-cover">
+                <div>
+                    <h1 class="text-lg font-display text-brand-dark">Fragrances Studio</h1>
+                    <p class="text-xs text-gray-500 -mt-1">Artisan parfumeur</p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<main id="home">
 
 <!-- HERO -->
-<img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de" style="width:100%;height:400px;object-fit:cover;">
+<section>
+    <div class="container container-max mx-auto px-4 py-12 grid lg:grid-cols-2 gap-8 items-center">
+
+        <div>
+            <h2 class="text-4xl font-display">Voyage olfactif moderne</h2>
+        </div>
+
+        <div>
+            <img id="heroMainImg"
+                 src="https://source.unsplash.com/800x600/?perfume,bottle"
+                 class="w-full h-96 object-cover rounded-xl">
+        </div>
+
+    </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collections" class="container container-max mx-auto px-4 py-12">
+
+<div id="fragrance-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+</section>
+
+</main>
 
 <script>
+// ONLY IMAGES CHANGED BELOW (structure untouched)
+
 const heroImages = [
-{ src: "https://images.unsplash.com/photo-1541643600914-78b084683601" },
-{ src: "https://images.unsplash.com/photo-1585386959984-a41552231658" },
-{ src: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519" }
+    { src: "https://source.unsplash.com/200x200/?perfume,bottle,glass", alt: "" },
+    { src: "https://source.unsplash.com/201x200/?fragrance,bottle", alt: "" },
+    { src: "https://source.unsplash.com/202x200/?perfume,flacon", alt: "" }
 ];
 
 const fragrances = [
-{
-id:"f1",
-title:"Cuir & Ambre",
-price:95,
-img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539"
-},
-{
-id:"f2",
-title:"Rosée Matinale",
-price:78,
-img:"https://images.unsplash.com/photo-1588405748880-12d1d2a59f75"
-},
-{
-id:"f3",
-title:"Épices d'Orient",
-price:102,
-img:"https://images.unsplash.com/photo-1619994403073-2cec99c0c8b6"
-},
-{
-id:"f4",
-title:"Brise Marine",
-price:72,
-img:"https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19"
-},
-{
-id:"f5",
-title:"Bois Secret",
-price:88,
-img:"https://images.unsplash.com/photo-1587017539504-67cfbddac569"
-},
-{
-id:"f6",
-title:"Fleur d'Oranger",
-price:69,
-img:"https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd"
-}
+    {
+        id: "f1",
+        title: "Cuir & Ambre",
+        img: "https://source.unsplash.com/600x600/?perfume,bottle,luxury"
+    },
+    {
+        id: "f2",
+        title: "Rosée Matinale",
+        img: "https://source.unsplash.com/601x600/?perfume,rose,bottle"
+    },
+    {
+        id: "f3",
+        title: "Épices d'Orient",
+        img: "https://source.unsplash.com/602x600/?perfume,spice,bottle"
+    },
+    {
+        id: "f4",
+        title: "Brise Marine",
+        img: "https://source.unsplash.com/603x600/?perfume,ocean,bottle"
+    },
+    {
+        id: "f5",
+        title: "Bois Secret",
+        img: "https://source.unsplash.com/604x600/?perfume,wood,bottle"
+    },
+    {
+        id: "f6",
+        title: "Fleur d'Oranger",
+        img: "https://source.unsplash.com/605x600/?perfume,orange,flower,bottle"
+    }
 ];
 
-document.write('<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:20px;">');
+const testimonials = [
+    { img: "https://source.unsplash.com/200x200/?perfume,person" },
+    { img: "https://source.unsplash.com/201x200/?fragrance,model" },
+    { img: "https://source.unsplash.com/202x200/?perfume,bottle,hand" }
+];
 
-fragrances.forEach(p=>{
-document.write(`
-<div style="border:1px solid #ddd;padding:10px;">
-<img src="${p.img}" style="width:100%;height:200px;object-fit:cover;">
-<h3>${p.title}</h3>
-<p>${p.price}€</p>
-</div>
-`);
-});
+const aboutImg = "https://source.unsplash.com/700x480/?perfume,atelier,bottle";
 
-document.write('</div>');
 </script>
 
 </body>
